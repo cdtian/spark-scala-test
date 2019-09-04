@@ -20,6 +20,7 @@ object DeequApp {
     val t_sub_shift_count = dataDf.groupBy("t_sub_shift").count().show(50)
     println()
     val t_hour_count = dataDf.groupBy("t_hour").count().show(50)
+    val t_time_count = dataDf.groupBy("t_time").count().show(50)
     println()
     val analysisResult: AnalyzerContext = {
       AnalysisRunner.onData(dataDf)
@@ -38,6 +39,7 @@ object DeequApp {
         .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
         .run()
     }
     println()
