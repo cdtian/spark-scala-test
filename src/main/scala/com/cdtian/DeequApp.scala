@@ -33,7 +33,8 @@ object DeequApp {
         .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
         .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
         //        .addAnalyzer(DataType("t_am_pm")) //相关性
-        .addAnalyzer(Distinctness("t_hour")) //相关性
+        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
         .run()
     }
     println()
