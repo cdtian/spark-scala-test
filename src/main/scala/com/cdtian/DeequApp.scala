@@ -35,6 +35,9 @@ object DeequApp {
         //        .addAnalyzer(DataType("t_am_pm")) //相关性
         .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
         .run()
     }
     println()
