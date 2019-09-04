@@ -32,7 +32,8 @@ object DeequApp {
         .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
         .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
-        .addAnalyzer(DataType("t_am_pm")) //相关性
+        //        .addAnalyzer(DataType("t_am_pm")) //相关性
+        .addAnalyzer(Distinctness("t_hour")) //相关性
         .run()
     }
     println()
