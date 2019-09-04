@@ -28,8 +28,9 @@ object DeequApp {
         .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据输了
         .addAnalyzer(ApproxCountDistinct("t_hour")) //
         .addAnalyzer(ApproxQuantile("t_hour", quantile = 0.5)) //基于quantile 区间的分布
-        .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //基于quantile 区间的分布
+        .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
+        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
         .run()
     }
     println()
