@@ -27,6 +27,7 @@ object DeequApp {
         .addAnalyzer(Completeness("t_time_sk"))
         .addAnalyzer(ApproxCountDistinct("t_sub_shift")) //
         .addAnalyzer(ApproxCountDistinct("t_hour")) //
+        .addAnalyzer(ApproxQuantile("t_hour", quantile = 0.5)) //
         .run()
     }
     println()
