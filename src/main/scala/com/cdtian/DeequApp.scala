@@ -22,7 +22,7 @@ object DeequApp {
       AnalysisRunner.onData(dataDf)
         .addAnalyzer(Size())
         .addAnalyzer(Completeness("t_time_sk"))
-        .addAnalyzer(ApproxCountDistinct("t_time_sk")) //
+        .addAnalyzer(ApproxCountDistinct("t_sub_shift")) //
         .run()
     }
 
