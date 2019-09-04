@@ -27,6 +27,7 @@ object DeequApp {
         .addAnalyzer(Completeness("t_time_sk")) //非空数据百分比
         .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据输了
         .addAnalyzer(ApproxCountDistinct("t_hour")) //
+        .addAnalyzer(ApproxCountDistinct("CountDistinct")) //
         .addAnalyzer(ApproxQuantile("t_hour", quantile = 0.5)) //基于quantile 区间的分布
         .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
