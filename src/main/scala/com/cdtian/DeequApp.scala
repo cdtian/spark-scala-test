@@ -40,6 +40,9 @@ object DeequApp {
         .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
+        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
         .run()
     }
     println()
