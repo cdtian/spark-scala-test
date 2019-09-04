@@ -16,12 +16,10 @@ object DeequApp {
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
-    val dataDf = newDataSet.toDF()
+    val dataDf = newDataSet.toDF().cache()
     val t_sub_shift_count = dataDf.groupBy("t_sub_shift").count().show()
-    val t_hour_count = dataDf.groupBy("t_hour").count().show()
     println()
-    println(s"$t_sub_shift_count")
-    println(s"$t_hour_count")
+    val t_hour_count = dataDf.groupBy("t_hour").count().show()
     println()
     val analysisResult: AnalyzerContext = {
       AnalysisRunner.onData(dataDf)
