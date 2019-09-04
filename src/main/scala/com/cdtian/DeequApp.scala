@@ -22,17 +22,7 @@ object DeequApp {
       AnalysisRunner.onData(dataDf)
         .addAnalyzer(Size())
         .addAnalyzer(Completeness("t_time_sk"))
-        .addAnalyzer(Completeness("t_time_id"))
-        .addAnalyzer(ApproxCountDistinct("t_time_sk"))
-        .addAnalyzer(ApproxCountDistinct("t_time"))
-        .addAnalyzer(ApproxCountDistinct("t_hour"))
-        .addAnalyzer(ApproxCountDistinct("t_minute"))
-        .addAnalyzer(CountDistinct("t_hour"))
-        .addAnalyzer(DataType("t_hour"))
-        .addAnalyzer(Distinctness("t_hour"))
-        .addAnalyzer(MutualInformation(Seq("t_hour", "t_minute")))
-        .addAnalyzer(ApproxCountDistinct("t_second"))
-        .addAnalyzer(ApproxCountDistinct("t_second"))
+        .addAnalyzer(ApproxCountDistinct("t_time_sk")) //
         .run()
     }
 
