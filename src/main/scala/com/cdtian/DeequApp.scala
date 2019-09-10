@@ -70,7 +70,8 @@ object DeequApp {
         .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(Mean("t_time_sk")) //列的不同值与列的所有值的比值
-//        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Minimum("t_time_sk")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
 //        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
