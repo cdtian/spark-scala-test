@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("size only 1 Analyzer").getOrCreate()
+    val spark = SparkSession.builder().appName("run size only 1 Analyzer").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -35,7 +35,7 @@ object DeequApp {
 //        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
+//        .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
 //        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
