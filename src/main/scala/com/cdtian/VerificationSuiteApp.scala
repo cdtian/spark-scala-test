@@ -31,7 +31,7 @@ object VerificationSuiteApp {
               .containsEmail("t_am_pm")
             .isUnique("t_time_sk")
             .isUnique("t_time_sk")
-//            .isUnique("t_time_id")
+            .isUnique("t_time_id")
 //            .isUnique("t_time")
         )
         .run()
