@@ -57,13 +57,14 @@ object DeequApp {
         .addAnalyzer(Compliance("top 30 t_hour", "t_hour >= 30")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top 20 t_minute", "t_minute >= 20")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top 10 t_second", "t_second >= 10")) //列大于临界值的百分比
-        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
-        .addAnalyzer(Correlation("t_time_id", "t_time_sk")) //相关性
-        .addAnalyzer(Correlation("t_am_pm", "t_am_pm")) //相关性
-        .addAnalyzer(Correlation("t_minute", "t_second")) //相关性
+//        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
+//        .addAnalyzer(Correlation("t_time_id", "t_time_sk")) //相关性
+//        .addAnalyzer(Correlation("t_am_pm", "t_am_pm")) //相关性
+//        .addAnalyzer(Correlation("t_minute", "t_second")) //相关性
 //                .addAnalyzer(DataType("t_am_pm")) //相关性
 //                .addAnalyzer(DataType("t_meal_time")) //相关性
         .addAnalyzer(Distinctness("t_am_pm")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Distinctness("t_time_id")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
