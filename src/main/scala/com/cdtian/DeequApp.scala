@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile 2 Compliance multi Correlation").getOrCreate()
+    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile 2 Compliance multi Correlation 1 DataType").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -61,7 +61,7 @@ object DeequApp {
         .addAnalyzer(Correlation("t_time_id", "t_time_sk")) //相关性
         .addAnalyzer(Correlation("t_am_pm", "t_am_pm")) //相关性
         .addAnalyzer(Correlation("t_minute", "t_second")) //相关性
-//        //        .addAnalyzer(DataType("t_am_pm")) //相关性
+                .addAnalyzer(DataType("t_am_pm")) //相关性
 //        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
