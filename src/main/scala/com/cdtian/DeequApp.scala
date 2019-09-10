@@ -19,7 +19,7 @@ object DeequApp {
     val dataDf = newDataSet.toDF().cache()
     val analysisResult: AnalyzerContext = {
       AnalysisRunner.onData(dataDf)
-//        .addAnalyzer(Size())
+        .addAnalyzer(Size())
 //        .addAnalyzer(Completeness("t_time_sk")) //非空数据百分比
 //        .addAnalyzer(Completeness("t_time_id")) //非空数据百分比
 //        .addAnalyzer(Completeness("t_time")) //非空数据百分比
