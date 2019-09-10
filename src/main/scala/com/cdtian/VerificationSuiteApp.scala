@@ -27,6 +27,7 @@ object VerificationSuiteApp {
           .hasMin("t_hour", _ == 0)
           .hasMean("t_hour", _ == 11.5)
             .hasApproxCountDistinct("t_hour",_ == 25)
+            .isContainedIn("t_am_pm",Array("AM","PM"))
         )
         .run()
     }
