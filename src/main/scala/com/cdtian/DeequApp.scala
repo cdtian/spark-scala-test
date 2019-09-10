@@ -12,40 +12,35 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("deequ job").getOrCreate()
+    val spark = SparkSession.builder().appName("size only 1 Analyzer").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
     val dataDf = newDataSet.toDF().cache()
-    val t_sub_shift_count = dataDf.groupBy("t_sub_shift").count().show(50)
-    println()
-    val t_hour_count = dataDf.groupBy("t_hour").count().show(50)
-    val t_time_count = dataDf.groupBy("t_time").count().show(50)
-    println()
     val analysisResult: AnalyzerContext = {
       AnalysisRunner.onData(dataDf)
         .addAnalyzer(Size())
-        .addAnalyzer(Completeness("t_time_sk")) //非空数据百分比
-        .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
-        .addAnalyzer(ApproxCountDistinct("t_hour")) //
-        .addAnalyzer(CountDistinct("t_hour")) // 统计不同数据个数
-        .addAnalyzer(ApproxQuantile("t_hour", quantile = 0.5)) //基于quantile 区间的分布
-        .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
-        .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
-        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
-        //        .addAnalyzer(DataType("t_am_pm")) //相关性
-        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Completeness("t_time_sk")) //非空数据百分比
+//        .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
+//        .addAnalyzer(ApproxCountDistinct("t_hour")) //
+//        .addAnalyzer(ApproxCountDistinct("t_time")) //
+//        .addAnalyzer(CountDistinct("t_hour")) // 统计不同数据个数
+//        .addAnalyzer(ApproxQuantile("t_hour", quantile = 0.5)) //基于quantile 区间的分布
+//        .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
+//        .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
+//        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
+//        //        .addAnalyzer(DataType("t_am_pm")) //相关性
+//        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
         .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
-        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
-        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
+//        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
         .run()
     }
-    println()
     val metrics = successMetricsAsDataFrame(spark, analysisResult);
     metrics.show();
     println()

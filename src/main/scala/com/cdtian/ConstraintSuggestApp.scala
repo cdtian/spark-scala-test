@@ -1,8 +1,8 @@
 package com.cdtian
 
 import com.amazon.deequ.suggestions.{ConstraintSuggestionRunner, Rules}
-import com.cdtian.DeequApp.Time_Dim
 import org.apache.spark.sql.{Encoders, SparkSession}
+import com.cdtian.DeequApp.Time_Dim
 
 /**
   * @author tianyj3@lenovo.com
@@ -27,6 +27,6 @@ object ConstraintSuggestApp {
       }
     }.toSeq.toDS()
 
-    suggestionDataFrame.show(100)
+    suggestionDataFrame.createOrReplaceTempView("suggest")
   }
 }
