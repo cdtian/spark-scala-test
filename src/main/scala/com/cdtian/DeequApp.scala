@@ -67,6 +67,7 @@ object DeequApp {
 //        .addAnalyzer(Distinctness("t_time_id")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Entropy("t_am_pm")) //熵
         .addAnalyzer(Maximum("t_time_sk")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Minimum("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(MutualInformation(Seq("t_hour", "t_time"))) //列的不同值与列的所有值的比值
