@@ -21,11 +21,15 @@ object DeequApp {
       AnalysisRunner.onData(dataDf)
         .addAnalyzer(Size())
         .addAnalyzer(Completeness("t_time_sk")) //非空数据百分比
-        .addAnalyzer(Completeness("t_meal_time")) //非空数据百分比
         .addAnalyzer(Completeness("t_time_id")) //非空数据百分比
         .addAnalyzer(Completeness("t_time")) //非空数据百分比
+        .addAnalyzer(Completeness("t_hour")) //非空数据百分比
         .addAnalyzer(Completeness("t_minute")) //非空数据百分比
         .addAnalyzer(Completeness("t_second")) //非空数据百分比
+        .addAnalyzer(Completeness("t_am_pm")) //非空数据百分比
+        .addAnalyzer(Completeness("t_shift")) //非空数据百分比
+        .addAnalyzer(Completeness("t_sub_shift")) //非空数据百分比
+        .addAnalyzer(Completeness("t_meal_time")) //非空数据百分比
 //        .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
 //        .addAnalyzer(ApproxCountDistinct("t_hour")) //
 //        .addAnalyzer(ApproxCountDistinct("t_time")) //
@@ -48,7 +52,6 @@ object DeequApp {
     }
     val metrics = successMetricsAsDataFrame(spark, analysisResult);
     metrics.show();
-    println()
     spark.stop()
   }
 
