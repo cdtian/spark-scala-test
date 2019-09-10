@@ -73,7 +73,7 @@ object DeequApp {
 //        .addAnalyzer(Minimum("t_hour")) //最小值
 //        .addAnalyzer(Minimum("t_time_sk")) //最小值
         .addAnalyzer(MutualInformation(Seq("t_minute", "t_second")))
-        .addAnalyzer(MutualInformation(Seq("t_minute", "t_second")))
+        .addAnalyzer(MutualInformation(Seq("t_minute", "t_hour")))
 //        .addAnalyzer(UniqueValueRatio("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
