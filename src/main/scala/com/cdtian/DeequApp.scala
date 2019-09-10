@@ -40,7 +40,7 @@ object DeequApp {
         .addAnalyzer(ApproxCountDistinct("t_shift")) // 统计不同数据个数(接近)
         .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
         .addAnalyzer(ApproxCountDistinct("t_meal_time")) // 统计不同数据个数(接近)
-//        .addAnalyzer(CountDistinct("t_time_sk")) // 统计不同数据个数
+        .addAnalyzer(CountDistinct("t_am_pm")) // 统计不同数据个数
 //        .addAnalyzer(CountDistinct("t_time_id")) // 统计不同数据个数
 //        .addAnalyzer(CountDistinct("t_time")) // 统计不同数据个数
         .addAnalyzer(ApproxQuantile("t_time_id", quantile = 0.1)) //基于quantile 区间的分布
@@ -61,9 +61,9 @@ object DeequApp {
         .addAnalyzer(Correlation("t_time_id", "t_time_sk")) //相关性
         .addAnalyzer(Correlation("t_am_pm", "t_am_pm")) //相关性
         .addAnalyzer(Correlation("t_minute", "t_second")) //相关性
-                .addAnalyzer(DataType("t_am_pm")) //相关性
-                .addAnalyzer(DataType("t_meal_time")) //相关性
-        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
+//                .addAnalyzer(DataType("t_am_pm")) //相关性
+//                .addAnalyzer(DataType("t_meal_time")) //相关性
+        .addAnalyzer(Distinctness("t_am_pm")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Entropy("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Maximum("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Mean("t_hour")) //列的不同值与列的所有值的比值
