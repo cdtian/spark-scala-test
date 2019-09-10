@@ -53,7 +53,7 @@ object DeequApp {
         .addAnalyzer(ApproxQuantile("t_shift", quantile = 0.8)) //基于quantile 区间的分布
         .addAnalyzer(ApproxQuantile("t_meal_time", quantile = 0.9)) //基于quantile 区间的分布
         .addAnalyzer(Compliance("top 1000 t_time_sk", "t_time_sk >= 1000")) //列大于临界值的百分比
-        .addAnalyzer(Compliance("top AAAAAAAAOBBFBAAA t_time_sk", "t_time_id >= AAAAAAAAOBBFBAAA")) //列大于临界值的百分比
+        .addAnalyzer(Compliance("top 45 t_time", "t_time >= 45")) //列大于临界值的百分比
 //        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
 //        //        .addAnalyzer(DataType("t_am_pm")) //相关性
 //        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
