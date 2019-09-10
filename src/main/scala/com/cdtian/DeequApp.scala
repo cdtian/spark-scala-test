@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile 2 Compliance multi Correlation 1 DataType").getOrCreate()
+    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile 2 Compliance multi Correlation 1 DataType 1 Distinctness").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -41,7 +41,7 @@ object DeequApp {
         .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
         .addAnalyzer(ApproxCountDistinct("t_meal_time")) // 统计不同数据个数(接近)
         .addAnalyzer(CountDistinct("t_am_pm")) // 统计不同数据个数
-//        .addAnalyzer(CountDistinct("t_time_id")) // 统计不同数据个数
+        .addAnalyzer(CountDistinct("t_time_id")) // 统计不同数据个数
 //        .addAnalyzer(CountDistinct("t_time")) // 统计不同数据个数
         .addAnalyzer(ApproxQuantile("t_time_id", quantile = 0.1)) //基于quantile 区间的分布
         .addAnalyzer(ApproxQuantile("t_time_sk", quantile = 0.2)) //基于quantile 区间的分布
