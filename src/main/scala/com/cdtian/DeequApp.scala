@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile").getOrCreate()
+    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct all ApproxQuantile 1 Compliance").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -52,7 +52,7 @@ object DeequApp {
         .addAnalyzer(ApproxQuantile("t_am_pm", quantile = 0.7)) //基于quantile 区间的分布
         .addAnalyzer(ApproxQuantile("t_shift", quantile = 0.8)) //基于quantile 区间的分布
         .addAnalyzer(ApproxQuantile("t_meal_time", quantile = 0.9)) //基于quantile 区间的分布
-//        .addAnalyzer(Compliance("top star_rating20", "t_hour >= 20")) //列大于临界值的百分比
+        .addAnalyzer(Compliance("top 1000 t_time_sk", "t_time_sk >= 1000")) //列大于临界值的百分比
 //        .addAnalyzer(Compliance("top star_rating24", "t_hour >= 24")) //基于quantile 区间的分布
 //        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
 //        //        .addAnalyzer(DataType("t_am_pm")) //相关性
