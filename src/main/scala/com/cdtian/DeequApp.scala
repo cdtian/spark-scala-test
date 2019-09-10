@@ -54,9 +54,9 @@ object DeequApp {
         .addAnalyzer(ApproxQuantile("t_meal_time", quantile = 0.9)) //基于quantile 区间的分布
         .addAnalyzer(Compliance("top 1000 t_time_sk", "t_time_sk >= 1000")) //列大于临界值的百分比
         .addAnalyzer(Compliance("top 45 t_time", "t_time >= 45")) //列大于临界值的百分比
-        .addAnalyzer(Compliance("top 30 t_time", "t_hour >= 30")) //列大于临界值的百分比
-        .addAnalyzer(Compliance("top 20 t_time", "t_minute >= 20")) //列大于临界值的百分比
-        .addAnalyzer(Compliance("top 10 t_time", "t_second >= 10")) //列大于临界值的百分比
+        .addAnalyzer(Compliance("top 30 t_hour", "t_hour >= 30")) //列大于临界值的百分比
+        .addAnalyzer(Compliance("top 20 t_minute", "t_minute >= 20")) //列大于临界值的百分比
+        .addAnalyzer(Compliance("top 10 t_second", "t_second >= 10")) //列大于临界值的百分比
 //        .addAnalyzer(Correlation("t_hour", "t_time")) //相关性
 //        //        .addAnalyzer(DataType("t_am_pm")) //相关性
 //        .addAnalyzer(Distinctness("t_hour")) //列的不同值与列的所有值的比值
@@ -71,7 +71,7 @@ object DeequApp {
         .run()
     }
     val metrics = successMetricsAsDataFrame(spark, analysisResult);
-    metrics.show();
+    metrics.show(50,true);
     spark.stop()
   }
 
