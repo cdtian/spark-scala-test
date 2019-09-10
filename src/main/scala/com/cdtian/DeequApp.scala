@@ -81,7 +81,7 @@ object DeequApp {
         .run()
     }
     val metrics = successMetricsAsDataFrame(spark, analysisResult);
-    metrics.show(50,true);
+    metrics.show(50,false);
     spark.stop()
   }
 
