@@ -13,7 +13,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object VerificationSuiteApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("containsEmail 1 isUnique repeat 2").getOrCreate()
+    val spark = SparkSession.builder().appName("aa .containsEmail 1 isUnique repeat 2").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -24,7 +24,8 @@ object VerificationSuiteApp {
         .addCheck(Check(CheckLevel.Error, "review check")
           .hasSize(_ >= 86400)
           .hasMin("t_hour", _ == 0)
-          .hasMin("t_hour", _ == 0)
+          .hasMin("t_time_id", _ == 0)
+          .hasMax("t_time_id", _ == 0)
           .hasMean("t_hour", _ == 11.5)
             .hasApproxCountDistinct("t_hour",_ == 25)
             .isContainedIn("t_am_pm",Array("AM","PM"))
