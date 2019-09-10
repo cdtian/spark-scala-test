@@ -28,6 +28,10 @@ object VerificationSuiteApp {
           .hasMean("t_hour", _ == 11.5)
             .hasApproxCountDistinct("t_hour",_ == 25)
             .isContainedIn("t_am_pm",Array("AM","PM"))
+              .containsEmail("t_am_pm")
+            .isUnique("t_time_sk")
+            .isUnique("t_time_id")
+            .isUnique("t_time")
         )
         .run()
     }
