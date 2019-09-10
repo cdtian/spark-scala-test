@@ -76,7 +76,7 @@ object DeequApp {
 //        .addAnalyzer(MutualInformation(Seq("t_minute", "t_second")))
         .addAnalyzer(UniqueValueRatio("t_minute")) //列的不同值与列的所有值的比值
         .addAnalyzer(Distinctness("t_minute")) //列的不同值与列的所有值的比值
-//        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
+        .addAnalyzer(Uniqueness("t_hour")) //列的不同值与列的所有值的比值
 //        .addAnalyzer(Uniqueness("t_time_id")) //列的不同值与列的所有值的比值
         .run()
     }
