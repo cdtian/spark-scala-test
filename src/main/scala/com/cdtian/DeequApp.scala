@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Encoders, SparkSession}
   */
 object DeequApp {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder().appName("run 1 size all Completeness 1 ApproxCountDistinct").getOrCreate()
+    val spark = SparkSession.builder().appName("run 1 size all Completeness all ApproxCountDistinct").getOrCreate()
     val dataSet = spark.read.textFile("/tmp/tpcds-generate/10/time_dim")
     import spark.implicits._
     val newDataSet = dataSet.map(_.split("\\|")).map(attrs => Time_Dim(attrs(0).toLong, attrs(1), attrs(2).toInt, attrs(3).toInt, attrs(4).toInt, attrs(5).toInt, attrs(6), attrs(7), attrs(8), attrs(8)))(Encoders.product[Time_Dim])
@@ -31,6 +31,15 @@ object DeequApp {
         .addAnalyzer(Completeness("t_sub_shift")) //非空数据百分比
         .addAnalyzer(Completeness("t_meal_time")) //非空数据百分比
         .addAnalyzer(ApproxCountDistinct("t_time_sk")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_time_id")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_time")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_hour")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_minute")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_second")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_am_pm")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_shift")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_sub_shift")) // 统计不同数据个数(接近)
+        .addAnalyzer(ApproxCountDistinct("t_meal_time")) // 统计不同数据个数(接近)
 //        .addAnalyzer(ApproxCountDistinct("t_hour")) //
 //        .addAnalyzer(ApproxCountDistinct("t_time")) //
 //        .addAnalyzer(CountDistinct("t_hour")) // 统计不同数据个数
